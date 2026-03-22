@@ -66,6 +66,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:0 52px;height:64px;di
 .project-row:hover .accent-word{color:#7c1d1d}
 .project-row:hover .project-arrow{transform:translateX(5px);color:var(--ink)}
 
+/* ── Tooltip ── */
+.project-row{position:relative}
+.tip{
+  position:absolute;
+  left:40px;
+  bottom:calc(100% + 6px);
+  background:var(--ink);
+  color:var(--bg);
+  padding:8px 14px;
+  border-radius:2px;
+  white-space:nowrap;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .18s ease, transform .18s ease;
+  transform:translateY(4px);
+  z-index:20;
+}
+.tip-desc{font-family:"Jost",sans-serif;font-size:11px;font-weight:300;letter-spacing:.02em;margin-bottom:5px}
+.tip-tags{display:flex;gap:5px}
+.tip-tag{font-family:"Space Mono",monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border:1px solid rgba(237,234,227,.2);color:rgba(237,234,227,.6);border-radius:0}
+.project-row:hover .tip{opacity:1;transform:translateY(0)}
+
 /* ── Footer ── */
 footer{border-top:1px solid var(--border);padding:26px 52px;font-family:"Space Mono",monospace;font-size:9px;color:var(--hint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;letter-spacing:.12em;text-transform:uppercase}
 
@@ -89,7 +111,7 @@ footer{border-top:1px solid var(--border);padding:26px 52px;font-family:"Space M
 
 <nav id="mainNav">
   <a href="#" class="nav-logo">manaks<em style="font-style:italic;color:#7c1d1d">u</em></a>
-  <div class="nav-right">Portfolio · 2026</div>
+  <a href="#projects" class="nav-right" style="text-decoration:none;cursor:pointer">Portfolio · 2026</a>
 </nav>
 
 <section id="hero">
@@ -117,38 +139,56 @@ footer{border-top:1px solid var(--border);padding:26px 52px;font-family:"Space M
   <div class="section-wrap" id="projects">
     <div class="section-label">Selected Work</div>
     <div class="project-list">
-
       <a class="project-row" data-url="https://mathboost-nine.vercel.app/">
         <div class="project-num">01</div>
         <div class="project-name"><em>mathboost</em> <span class="accent-word">7</span></div>
         <div class="project-arrow">→</div>
+        <div class="tip">
+          <div class="tip-desc">AI math practice for Georgia 7th grade.</div>
+          <div class="tip-tags"><span class="tip-tag">Education</span><span class="tip-tag">AI</span><span class="tip-tag">GSE</span></div>
+        </div>
       </a>
 
       <a class="project-row" data-url="https://keralafuelpulse.vercel.app/">
         <div class="project-num">02</div>
         <div class="project-name"><em>kerala fuel</em> <span class="accent-word">pulse</span></div>
         <div class="project-arrow">→</div>
+        <div class="tip">
+          <div class="tip-desc">Live fuel prices for all 14 Kerala districts.</div>
+          <div class="tip-tags"><span class="tip-tag">Data</span><span class="tip-tag">Kerala</span><span class="tip-tag">Bilingual</span></div>
+        </div>
       </a>
 
       <a class="project-row" data-url="https://deck-tune.vercel.app/">
         <div class="project-num">03</div>
         <div class="project-name"><em>deck</em><span class="accent-word">tune</span></div>
         <div class="project-arrow">→</div>
+        <div class="tip">
+          <div class="tip-desc">Steam Deck optimizer — 5 AI play modes.</div>
+          <div class="tip-tags"><span class="tip-tag">Gaming</span><span class="tip-tag">AI</span><span class="tip-tag">Tools</span></div>
+        </div>
       </a>
 
       <a class="project-row" data-url="https://gas-pulse.vercel.app/">
         <div class="project-num">04</div>
         <div class="project-name"><em>gas</em><span class="accent-word">pulse</span></div>
         <div class="project-arrow">→</div>
+        <div class="tip">
+          <div class="tip-desc">US gas prices across 270+ cities.</div>
+          <div class="tip-tags"><span class="tip-tag">Data</span><span class="tip-tag">US</span><span class="tip-tag">Real-time</span></div>
+        </div>
       </a>
 
       <a class="project-row" data-url="https://shelf-umber.vercel.app/">
         <div class="project-num">05</div>
         <div class="project-name"><em>shel</em><span class="accent-word">f</span></div>
         <div class="project-arrow">→</div>
+        <div class="tip">
+          <div class="tip-desc">Taste-based book & music recommendations.</div>
+          <div class="tip-tags"><span class="tip-tag">Books</span><span class="tip-tag">AI</span><span class="tip-tag">Discovery</span></div>
+        </div>
       </a>
-
-    </div>
+    </div></div>
   </div>
 </div>
 
