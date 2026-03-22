@@ -64,30 +64,29 @@ section{padding:100px 52px;max-width:1100px;margin:0 auto}
 .project-row{display:flex;align-items:center;padding:32px 0;border-bottom:1px solid var(--border);cursor:pointer;position:relative;transition:padding .28s cubic-bezier(.4,0,.2,1);text-decoration:none;color:inherit}
 .project-row:first-child{border-top:1px solid var(--border)}
 .project-num{font-family:"Space Mono",monospace;font-size:9px;color:var(--hint);letter-spacing:.14em;width:36px;flex-shrink:0;transition:color .2s}
-.project-name{font-family:"Cormorant Garamond",serif;font-size:clamp(20px,3vw,34px);font-weight:300;color:rgba(26,25,22,.28);line-height:1;flex:1;transition:color .28s;letter-spacing:-.02em}
+.project-name{font-family:"Cormorant Garamond",serif;font-size:clamp(20px,3vw,34px);font-weight:300;color:rgba(26,25,22,.28);line-height:1;flex:1;min-width:0;transition:color .28s;letter-spacing:-.02em}
 .project-name em{font-style:italic}
 .accent-word{color:rgba(124,29,29,.45);font-style:normal;transition:color .28s}
-.project-row-tags{display:flex;gap:6px;margin-left:16px;opacity:0;transition:opacity .2s}
-.ptag{font-family:"Space Mono",monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border:1px solid var(--border2);color:var(--hint);border-radius:0}
+
+
 .project-arrow{font-family:"Space Mono",monospace;font-size:11px;color:var(--hint);margin-left:16px;flex-shrink:0;transition:transform .28s,color .2s}
 .project-row:hover{padding-left:12px}
 .project-row:hover .project-num{color:var(--muted)}
 .project-row:hover .project-name{color:var(--ink)}
 .project-row:hover .accent-word{color:#7c1d1d}
-.project-row:hover .project-row-tags{opacity:1}
+.project-row:hover 
 .project-row:hover .project-arrow{transform:translateX(6px);color:var(--ink)}
 
 /* Float card */
-.float-card{position:absolute;left:calc(100% + 28px);top:50%;transform:translateY(-50%);width:260px;background:var(--surf);border:1px solid var(--border2);border-radius:0;padding:20px 22px;opacity:0;pointer-events:none;transition:opacity .24s ease,transform .3s cubic-bezier(.4,0,.2,1);z-index:10;box-shadow:0 16px 48px rgba(0,0,0,.08)}
-.project-row:hover .float-card{opacity:1;transform:translateY(-50%) translateX(0)}
-.fc-preview{display:none}
-.fc-preview-overlay{display:none}
-.fc-body{padding:0}
-.fc-name{font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:300;color:var(--ink);margin-bottom:10px;letter-spacing:-.01em;font-style:italic}
-.fc-desc{font-family:"Jost",sans-serif;font-size:12px;color:var(--muted);line-height:1.75;margin-bottom:14px;font-weight:300}
-.fc-tags{display:flex;gap:5px;flex-wrap:wrap}
-.fc-tag{font-family:"Space Mono",monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--border);color:var(--hint);border-radius:0}
-@media(max-width:768px){nav{padding:18px 24px}.nav-links{gap:20px}section{padding:80px 24px}.about-layout{grid-template-columns:1fr;gap:40px}.hero-content{padding:0 24px}.hero-scroll{left:24px}.float-card{display:none}.project-row-tags{display:none}}
+
+
+
+
+
+
+
+
+.project-row:hover .project-row:hover .project-row:hover @media(max-width:768px){nav{padding:18px 24px}.nav-links{gap:20px}section{padding:80px 24px}.about-layout{grid-template-columns:1fr;gap:40px}.hero-content{padding:0 24px}.hero-scroll{left:24px}}
 @media(max-width:480px){.nav-links{display:none}}
 
 /* ── Footer ── */
@@ -141,16 +140,11 @@ footer{border-top:1px solid var(--border);padding:28px 52px;font-family:"Space M
 <section id="projects">
   <div class="section-label">Selected Work</div>
 
-  <div class="project-row"><div class="project-num">01</div><div class="project-name"><em>mathboost</em> <span class="accent-word">7</span></div><div class="project-row-tags"><span class="ptag">Education</span><span class="ptag">AI</span><span class="ptag">GSE</span></div><div class="project-arrow">→</div><div class="float-card"><div class="fc-body"><div class="fc-name">mathboost 7</div><div class="fc-desc">AI-powered math practice for Georgia 7th grade accelerated learners.</div><div class="fc-tags"><span class="fc-tag">Education</span><span class="fc-tag">AI</span><span class="fc-tag">GSE</span></div></div></div></div>
-
-  <div class="project-row"><div class="project-num">02</div><div class="project-name"><em>kerala fuel</em> <span class="accent-word">pulse</span></div><div class="project-row-tags"><span class="ptag">Dashboard</span><span class="ptag">Kerala</span><span class="ptag">Real-time</span></div><div class="project-arrow">→</div><div class="float-card"><div class="fc-body"><div class="fc-name">kerala fuel pulse</div><div class="fc-desc">Live fuel prices for all 14 Kerala districts. Bilingual EN / Malayalam.</div><div class="fc-tags"><span class="fc-tag">Dashboard</span><span class="fc-tag">Kerala</span><span class="fc-tag">Real-time</span></div></div></div></div>
-
-  <div class="project-row"><div class="project-num">03</div><div class="project-name"><em>deck</em><span class="accent-word">tune</span></div><div class="project-row-tags"><span class="ptag">Gaming</span><span class="ptag">AI</span><span class="ptag">Tools</span></div><div class="project-arrow">→</div><div class="float-card"><div class="fc-body"><div class="fc-name">decktune</div><div class="fc-desc">Steam Deck optimizer. AI generates 5 play modes per game.</div><div class="fc-tags"><span class="fc-tag">Gaming</span><span class="fc-tag">AI</span><span class="fc-tag">Tools</span></div></div></div></div>
-
-  <div class="project-row"><div class="project-num">04</div><div class="project-name"><em>gas</em><span class="accent-word">pulse</span></div><div class="project-row-tags"><span class="ptag">Data</span><span class="ptag">US</span><span class="ptag">Real-time</span></div><div class="project-arrow">→</div><div class="float-card"><div class="fc-body"><div class="fc-name">gaspulse</div><div class="fc-desc">Daily US gas prices across 270+ cities — state averages and city comparison.</div><div class="fc-tags"><span class="fc-tag">Data</span><span class="fc-tag">US</span><span class="fc-tag">Real-time</span></div></div></div></div>
-
-  <div class="project-row"><div class="project-num">05</div><div class="project-name"><em>shel</em><span class="accent-word">f</span></div><div class="project-row-tags"><span class="ptag">Books</span><span class="ptag">AI</span><span class="ptag">Discovery</span></div><div class="project-arrow">→</div><div class="float-card"><div class="fc-body"><div class="fc-name">shelf</div><div class="fc-desc">Taste-based book recommendations — tell Claude what you love, get 8 personalised picks.</div><div class="fc-tags"><span class="fc-tag">Books</span><span class="fc-tag">AI</span><span class="fc-tag">Discovery</span></div></div></div></div>
-
+  <div class="project-row"><div class="project-num">01</div><div class="project-name"><em>mathboost</em> <span class="accent-word">7</span></div><div class="project-arrow">→</div>
+  <div class="project-row"><div class="project-num">02</div><div class="project-name"><em>kerala fuel</em> <span class="accent-word">pulse</span></div><div class="project-arrow">→</div>
+  <div class="project-row"><div class="project-num">03</div><div class="project-name"><em>deck</em><span class="accent-word">tune</span></div><div class="project-arrow">→</div>
+  <div class="project-row"><div class="project-num">04</div><div class="project-name"><em>gas</em><span class="accent-word">pulse</span></div><div class="project-arrow">→</div>
+  <div class="project-row"><div class="project-num">05</div><div class="project-name"><em>shel</em><span class="accent-word">f</span></div><div class="project-arrow">→</div>
 </section>
 
 <footer>
