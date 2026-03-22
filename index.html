@@ -271,89 +271,105 @@ section {
 
 /* ── PROJECTS ── */
 #projects { border-top: 1px solid var(--border); }
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
+/* ── Projects — floating hover list ── */
+.projects-stack { display: flex; flex-direction: column; }
+.project-row {
+  display: flex; align-items: center;
+  padding: 22px 0;
+  cursor: pointer; position: relative;
+  transition: padding .28s cubic-bezier(.4,0,.2,1);
+  text-decoration: none; color: inherit;
 }
-.project-card {
-  background: var(--black);
-  padding: 44px 36px 40px;
-  display: flex; flex-direction: column;
-  gap: 0;
-  position: relative;
-  overflow: hidden;
-  transition: background .25s;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-}
-.project-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 1px;
-  background: transparent;
-  transition: background .25s;
-}
-.project-card:hover { background: rgba(232,228,220,.025); }
-.project-card:hover::before { background: rgba(232,228,220,.2); }
+
 .project-num {
   font-family: 'Space Mono', monospace;
-  font-size: 10px; font-weight: 300;
-  color: var(--hint);
-  letter-spacing: .12em;
-  margin-bottom: 40px;
-}
-.project-icon {
-  font-size: 32px;
-  margin-bottom: 24px;
-  display: block;
-  opacity: .7;
+  font-size: 10px; color: var(--hint);
+  letter-spacing: .1em; width: 36px; flex-shrink: 0;
+  transition: color .2s;
 }
 .project-name {
   font-family: 'Instrument Serif', 'DM Serif Display', serif;
-  font-size: 26px; font-weight: 400;
-  letter-spacing: .04em;
-  color: var(--ink);
-  margin-bottom: 10px;
-  line-height: 1.1;
+  font-size: clamp(22px, 3.5vw, 38px);
+  color: rgba(232,228,220,.4);
+  line-height: 1; flex: 1;
+  transition: color .28s;
 }
-.project-tagline {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 12px; font-weight: 300;
-  color: var(--muted);
-  line-height: 1.6;
-  flex: 1;
-  margin-bottom: 32px;
-}
-.project-tags {
-  display: flex; gap: 8px; flex-wrap: wrap;
-  margin-bottom: 28px;
+.project-name em { font-style: italic; }
+.accent-word { color: rgba(124,29,29,.45); font-style: normal; transition: color .28s; }
+.project-row-tags {
+  display: flex; gap: 6px; margin-left: 16px;
+  opacity: 0; transition: opacity .2s;
 }
 .ptag {
   font-family: 'Space Mono', monospace;
-  font-size: 9px; font-weight: 300;
-  letter-spacing: .1em; text-transform: uppercase;
+  font-size: 9px; letter-spacing: .08em; text-transform: uppercase;
   padding: 3px 9px;
   border: 1px solid var(--border2);
-  color: var(--hint);
-  border-radius: 2px;
+  color: var(--hint); border-radius: 2px;
 }
-.project-link {
+.project-arrow {
   font-family: 'Space Mono', monospace;
-  font-size: 10px; font-weight: 300;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: var(--hint);
-  display: flex; align-items: center; gap: 10px;
-  transition: color .2s, gap .2s;
+  font-size: 12px; color: var(--hint);
+  margin-left: 16px; flex-shrink: 0;
+  transition: transform .28s, color .2s;
 }
-.project-card:hover .project-link {
-  color: var(--ink);
-  gap: 14px;
+.float-card {
+  position: absolute; right: -280px; top: 50%;
+  transform: translateY(-50%) translateX(20px);
+  width: 280px;
+  background: #0f0f0d;
+  border: 1px solid rgba(232,228,220,.1);
+  border-radius: 14px;
+  overflow: hidden;
+  opacity: 0; pointer-events: none;
+  transition: opacity .28s, transform .32s cubic-bezier(.4,0,.2,1);
+  z-index: 10;
+  box-shadow: 0 24px 64px rgba(0,0,0,.5);
 }
-.project-link::after { content: '→'; }
+.fc-preview {
+  width: 100%; height: 160px;
+  position: relative; overflow: hidden;
+  background: #111;
+  border-bottom: 1px solid rgba(232,228,220,.08);
+}
+.fc-preview iframe {
+  width: 960px; height: 640px;
+  border: none;
+  transform: scale(0.292) translateX(-50%) translateY(-50%);
+  transform-origin: top left;
+  position: absolute; top: 50%; left: 50%;
+  pointer-events: none;
+}
+.fc-preview-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, #0f0f0d 100%);
+}
+.fc-body { padding: 14px 16px; }
+.fc-name {
+  font-family: 'Instrument Serif', 'DM Serif Display', serif;
+  font-size: 14px; color: rgba(232,228,220,.7);
+  margin-bottom: 6px;
+}
+.fc-desc {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; color: rgba(232,228,220,.32);
+  line-height: 1.6; margin-bottom: 10px;
+}
+.fc-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.fc-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px; letter-spacing: .08em; text-transform: uppercase;
+  padding: 2px 7px; border: 1px solid rgba(232,228,220,.1);
+  color: rgba(232,228,220,.22); border-radius: 2px;
+}
+.project-row:hover { padding-left: 14px; }
+.project-row:hover .project-num { color: rgba(232,228,220,.5); }
+.project-row:hover .project-name { color: rgba(232,228,220,.92); }
+.project-row:hover .accent-word { color: #7c1d1d; }
+.project-row:hover .project-row-tags { opacity: 1; }
+.project-row:hover .project-arrow { transform: translateX(6px); color: rgba(232,228,220,.6); }
+.project-row:hover .float-card { opacity: 1; transform: translateY(-50%) translateX(-290px); }
+@media(max-width:768px){ .float-card{ display:none; } .project-row-tags{ display:none; } }
 
 /* ── FOOTER ── */
 footer {
@@ -459,61 +475,81 @@ footer {
 <!-- PROJECTS -->
 <section id="projects">
   <div class="section-label">Selected Work</div>
-  <div class="projects-grid">
+  <div class="projects-stack">
 
-    <div class="project-card">
+    <div class="project-row">
       <div class="project-num">01</div>
-      <span class="project-icon">🧮</span>
       <div class="project-name"><em>mathboost</em> <span class="accent-word">7</span></div>
-      <div class="project-tagline">AI-powered math practice for Georgia 7th grade accelerated learners. 3,500+ questions, timed challenges, step-by-step solutions.</div>
-      <div class="project-tags">
-        <span class="ptag">Education</span>
-        <span class="ptag">AI</span>
-        <span class="ptag">GSE</span>
+      <div class="project-row-tags"><span class="ptag">Education</span><span class="ptag">AI</span><span class="ptag">GSE</span></div>
+      <div class="project-arrow">→</div>
+      <div class="float-card">
+        <div class="fc-preview">
+          <iframe src="https://mathboost-nine.vercel.app/" loading="lazy" title="MathBoost 7"></iframe>
+          <div class="fc-preview-overlay"></div>
+        </div>
+        <div class="fc-body">
+          <div class="fc-name">mathboost 7</div>
+          <div class="fc-desc">AI-powered math practice for Georgia 7th grade accelerated learners. 3,500+ questions, timed challenges.</div>
+          <div class="fc-tags"><span class="fc-tag">Education</span><span class="fc-tag">AI</span><span class="fc-tag">GSE</span></div>
+        </div>
       </div>
-      <div class="project-link">View project</div>
     </div>
 
-    <div class="project-card">
+    <div class="project-row">
       <div class="project-num">02</div>
-      <span class="project-icon">⛽</span>
       <div class="project-name"><em>kerala fuel</em> <span class="accent-word">pulse</span></div>
-      <div class="project-tagline">Live fuel prices and cost of living tracker for all 14 Kerala districts. Bilingual EN / Malayalam with auto location detection.</div>
-      <div class="project-tags">
-        <span class="ptag">Dashboard</span>
-        <span class="ptag">Kerala</span>
-        <span class="ptag">Real-time</span>
+      <div class="project-row-tags"><span class="ptag">Dashboard</span><span class="ptag">Kerala</span><span class="ptag">Real-time</span></div>
+      <div class="project-arrow">→</div>
+      <div class="float-card">
+        <div class="fc-preview">
+          <iframe src="https://keralafuelpulse.vercel.app/" loading="lazy" title="Kerala Fuel Pulse"></iframe>
+          <div class="fc-preview-overlay"></div>
+        </div>
+        <div class="fc-body">
+          <div class="fc-name">kerala fuel pulse</div>
+          <div class="fc-desc">Live fuel prices for all 14 Kerala districts. Bilingual EN / Malayalam, auto location detection.</div>
+          <div class="fc-tags"><span class="fc-tag">Dashboard</span><span class="fc-tag">Kerala</span><span class="fc-tag">Real-time</span></div>
+        </div>
       </div>
-      <div class="project-link">View project</div>
     </div>
 
-    <div class="project-card">
+    <div class="project-row">
       <div class="project-num">03</div>
-      <span class="project-icon">🎮</span>
-      <div class="project-name"><em>deck</em><span class="accent-word">tune</span></div><div style="font-family:'Space Mono',monospace;font-size:9px;color:rgba(232,228,220,.25);margin-top:4px;letter-spacing:.08em">© 2026 Manaksu</div>
-      <div class="project-tagline">Steam Deck optimizer that generates 5 AI-tuned play modes per game — Stable FPS, Performance, Visual Fidelity, Balanced, Battery Saver.</div>
-      <div class="project-tags">
-        <span class="ptag">Gaming</span>
-        <span class="ptag">AI</span>
-        <span class="ptag">Tools</span>
+      <div class="project-name"><em>deck</em><span class="accent-word">tune</span></div>
+      <div class="project-row-tags"><span class="ptag">Gaming</span><span class="ptag">AI</span><span class="ptag">Tools</span></div>
+      <div class="project-arrow">→</div>
+      <div class="float-card">
+        <div class="fc-preview">
+          <iframe src="https://deck-tune.vercel.app/" loading="lazy" title="DeckTune"></iframe>
+          <div class="fc-preview-overlay"></div>
+        </div>
+        <div class="fc-body">
+          <div class="fc-name">decktune</div>
+          <div class="fc-desc">Steam Deck optimizer. AI generates 5 play modes per game — Stable FPS, Performance, Visual Fidelity and more.</div>
+          <div class="fc-tags"><span class="fc-tag">Gaming</span><span class="fc-tag">AI</span><span class="fc-tag">Tools</span></div>
+        </div>
       </div>
-      <div class="project-link">View project</div>
     </div>
 
-    <div class="project-card">
+    <div class="project-row">
       <div class="project-num">04</div>
-      <span class="project-icon">⛽</span>
-      <div class="project-name"><em>fuel</em> <span class="accent-word">pulse</span></div>
-      <div class="project-tagline">Daily US gas prices across 270+ cities with cost of living index, budget breakdown and city comparison.</div>
-      <div class="project-tags">
-        <span class="ptag">Data</span>
-        <span class="ptag">US</span>
-        <span class="ptag">Real-time</span>
+      <div class="project-name"><em>gas</em><span class="accent-word">pulse</span></div>
+      <div class="project-row-tags"><span class="ptag">Data</span><span class="ptag">US</span><span class="ptag">Real-time</span></div>
+      <div class="project-arrow">→</div>
+      <div class="float-card">
+        <div class="fc-preview">
+          <iframe src="https://gas-pulse.vercel.app/" loading="lazy" title="GasPulse"></iframe>
+          <div class="fc-preview-overlay"></div>
+        </div>
+        <div class="fc-body">
+          <div class="fc-name">gaspulse</div>
+          <div class="fc-desc">Daily US gas prices across 270+ cities — state averages, city comparison and cost of living breakdown.</div>
+          <div class="fc-tags"><span class="fc-tag">Data</span><span class="fc-tag">US</span><span class="fc-tag">Real-time</span></div>
+        </div>
       </div>
-      <div class="project-link">View project</div>
     </div>
 
-  </div>
+  </div>  </div>
 </section>
 
 <!-- FOOTER -->
@@ -574,7 +610,7 @@ const links = {
   '03': 'https://deck-tune.vercel.app/',
   '04': 'https://gas-pulse.vercel.app/',
 };
-document.querySelectorAll('.project-card').forEach((card, i) => {
+document.querySelectorAll('.project-row').forEach((card, i) => {
   card.addEventListener('click', () => {
     const url = Object.values(links)[i];
     if (url && url !== '#') window.open(url, '_blank');
