@@ -273,7 +273,7 @@ section {
 #projects { border-top: 1px solid var(--border); }
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
@@ -500,6 +500,19 @@ footer {
       <div class="project-link">View project</div>
     </div>
 
+    <div class="project-card">
+      <div class="project-num">04</div>
+      <span class="project-icon">⛽</span>
+      <div class="project-name"><em>fuel</em> <span class="accent-word">pulse</span></div>
+      <div class="project-tagline">Daily US gas prices across 270+ cities with cost of living index, budget breakdown and city comparison.</div>
+      <div class="project-tags">
+        <span class="ptag">Data</span>
+        <span class="ptag">US</span>
+        <span class="ptag">Real-time</span>
+      </div>
+      <div class="project-link">View project</div>
+    </div>
+
   </div>
 </section>
 
@@ -559,6 +572,7 @@ const links = {
   '01': 'https://mathboost-nine.vercel.app/',
   '02': 'https://keralafuelpulse.vercel.app/',
   '03': 'https://deck-tune.vercel.app/',
+  '04': 'https://gas-pulse.vercel.app/',
 };
 document.querySelectorAll('.project-card').forEach((card, i) => {
   card.addEventListener('click', () => {
