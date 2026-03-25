@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>manaksu</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#edeae3;--surf:#f5f2eb;--surf2:#e8e4dc;
+  --ink:#1a1916;--muted:#2e2c28;--hint:#5a5850;
+  --border:rgba(26,25,22,.15);--border2:rgba(26,25,22,.28);
+}
+html,body{min-height:100%;background:var(--bg);color:var(--ink);font-family:"Jost",sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ── Loader ── */
+#loader{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s ease}
+#loader.done{opacity:0;pointer-events:none}
+.ld-word{font-family:"Cormorant Garamond",serif;font-size:clamp(22px,3.5vw,32px);font-weight:300;letter-spacing:.28em;color:rgba(26,25,22,.15);margin-bottom:48px}
+.ld-num{font-family:"Cormorant Garamond",serif;font-size:clamp(96px,18vw,140px);font-weight:300;color:var(--ink);line-height:.88;letter-spacing:-.04em;margin-bottom:24px}
+.ld-bar{width:min(220px,52vw);height:1px;background:rgba(26,25,22,.1);position:relative;overflow:hidden;margin-bottom:16px}
+.ld-fill{position:absolute;left:0;top:0;height:100%;background:var(--ink);width:0%;transition:width .08s linear}
+.ld-lbl{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(26,25,22,.25)}
+
+/* ── Nav ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:0 52px;height:64px;display:flex;align-items:center;justify-content:space-between;transition:opacity .4s ease}
+.nav-logo{font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:300;letter-spacing:.04em;color:var(--ink);text-decoration:none}
+.nav-right{font-family:"Space Mono",monospace;font-size:9px;color:var(--hint);letter-spacing:.14em;text-transform:uppercase}
+
+/* ── Hero ── */
+#hero{min-height:50vh;position:relative;display:flex;align-items:center;overflow:hidden;max-width:none;padding:0}
+
+
+.hero-content{position:relative;z-index:2;padding:0 52px;max-width:680px}
+
+/* ── Sections ── */
+.section-wrap{max-width:960px;margin:0 auto;padding:48px 52px 40px}
+.section-label{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--hint);margin-bottom:28px;display:flex;align-items:center;gap:16px}
+.section-label::after{content:"";flex:1;height:1px;background:var(--border)}
+.section-divider{border-top:1px solid var(--border);margin-top:0}
+
+/* ── About ── */
+.about-text{position:relative;z-index:2}
+.about-heading{font-family:"Cormorant Garamond",serif;font-size:clamp(42px,6vw,68px);font-weight:300;line-height:1.0;letter-spacing:-.02em;margin-bottom:24px;color:var(--ink)}
+.about-heading em{font-style:italic;color:var(--muted)}
+.about-body{font-size:15px;font-weight:300;color:var(--muted);line-height:1.9;max-width:480px}
+.about-body p+p{margin-top:16px}
+
+/* ── Projects ── */
+.project-list{display:flex;flex-direction:column}
+.project-row{display:flex;align-items:center;padding:22px 0;border-bottom:1px solid var(--border);cursor:pointer;text-decoration:none;color:inherit;transition:padding-left .25s ease;position:relative;}
+.project-row:first-child{border-top:1px solid var(--border)}
+.project-row:hover{padding-left:10px}
+.project-num{font-family:"Space Mono",monospace;font-size:9px;color:var(--hint);letter-spacing:.14em;width:32px;flex-shrink:0;transition:color .2s}
+.project-name{font-family:"Cormorant Garamond",serif;font-size:clamp(22px,3vw,34px);font-weight:300;color:rgba(26,25,22,.55);line-height:1;flex:1;letter-spacing:-.02em;transition:color .25s}
+.project-name em{font-style:italic}
+.accent-word{color:rgba(124,29,29,.75);transition:color .25s}
+.project-arrow{font-family:"Space Mono",monospace;font-size:10px;color:var(--hint);flex-shrink:0;transition:transform .25s,color .2s}
+.project-row:hover .project-num{color:var(--muted)}
+.project-row:hover .project-name{color:var(--ink)}
+.project-row:hover .accent-word{color:#7c1d1d}
+.project-row:hover .project-arrow{transform:translateX(5px);color:var(--ink)}
+
+/* ── Tooltip ── */
+.project-row{position:relative}
+.tip{
+  pointer-events:none;
+  position:absolute;
+  left:40px;
+  bottom:calc(100% + 6px);
+  background:var(--ink);
+  color:var(--bg);
+  padding:8px 14px;
+  border-radius:2px;
+  white-space:nowrap;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .18s ease, transform .18s ease;
+  transform:translateY(4px);
+  z-index:20;
+}
+.tip-desc{font-family:"Jost",sans-serif;font-size:11px;font-weight:300;letter-spacing:.02em;margin-bottom:5px}
+.tip-tags{display:flex;gap:5px}
+.tip-tag{font-family:"Space Mono",monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border:1px solid rgba(237,234,227,.2);color:rgba(237,234,227,.6);border-radius:0}
+.project-row:hover .tip{opacity:1;transform:translateY(0)}
+
+/* ── Footer ── */
+.contact-strip{border-top:1px solid var(--border);padding:48px 52px}
+.contact-inner{max-width:960px;margin:0 auto}
+.contact-label{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--hint);margin-bottom:16px}
+.contact-links{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.contact-link{font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:300;color:var(--ink);text-decoration:none;transition:opacity .2s}
+.contact-link:hover{opacity:.5}
+.contact-sep{color:var(--border2);font-size:18px}
+footer{border-top:1px solid var(--border);padding:26px 52px;font-family:"Space Mono",monospace;font-size:9px;color:var(--hint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;letter-spacing:.12em;text-transform:uppercase}
+
+@media(max-width:768px){.contact-strip{padding:36px 24px}.contact-link{font-size:18px}.hero-content{padding:48px 24px 44px}.hero-statement span{font-size:clamp(26px,7vw,38px)}.hero-sub-row{flex-direction:column;gap:16px}.hero-divider{width:40px;height:1px;min-height:auto}
+  nav{padding:0 24px}
+  .hero-content{padding:0 24px}
+    .section-wrap{padding:72px 24px}
+  footer{padding:22px 24px}
+}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="ld-word">manaks<em style="font-style:italic;color:rgba(124,29,29,.25)">u</em></div>
+  <div class="ld-num" id="ldNum">0</div>
+  <div class="ld-bar"><div class="ld-fill" id="ldFill"></div></div>
+  <div class="ld-lbl" id="ldLbl">Loading</div>
+</div>
+
+<nav id="mainNav">
+  <a href="#" class="nav-logo">manaks<em style="font-style:italic;color:#7c1d1d">u</em></a>
+  <a href="#projects" class="nav-right" style="text-decoration:none;cursor:pointer">Portfolio · 2026</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Where aesthetics meet function.</div>
+  </div>
+</section>
+
+<div class="section-divider">
+  <div class="section-wrap" id="about">
+    <div class="section-label">About</div>
+    <div class="about-layout">
+      <div class="about-text">
+        <div class="about-heading">Ideas built<br><em>into reality.</em></div>
+        <div class="about-body">
+          <p>I build web applications, tools, and experiences that are useful, well-crafted, and a little bit obsessive about the details.</p>
+          <p>From AI-powered education tools to real-time data dashboards — each project starts with a question worth answering.</p>
+        </div>
+  </div>
+</div>
+
+<div class="section-divider">
+  <div class="section-wrap" id="projects">
+    <div class="section-label">Selected Work</div>
+    <div class="project-list">
+      <a class="project-row" href="https://mathboost-nine.vercel.app/" target="_blank">
+        <div class="project-num">01</div>
+        <div class="project-name"><em>mathboost</em> <span class="accent-word">7</span></div>
+        <div class="project-arrow">→</div>
+        <div class="tip">
+          <div class="tip-desc">AI math practice for Georgia 7th grade.</div>
+          <div class="tip-tags"><span class="tip-tag">Education</span><span class="tip-tag">AI</span><span class="tip-tag">GSE</span></div>
+        </div>
+      </a>
+
+      <a class="project-row" href="https://keralafuelpulse.vercel.app/" target="_blank">
+        <div class="project-num">02</div>
+        <div class="project-name"><em>kerala fuel</em> <span class="accent-word">pulse</span></div>
+        <div class="project-arrow">→</div>
+        <div class="tip">
+          <div class="tip-desc">Live fuel prices for all 14 Kerala districts.</div>
+          <div class="tip-tags"><span class="tip-tag">Data</span><span class="tip-tag">Kerala</span><span class="tip-tag">Bilingual</span></div>
+        </div>
+      </a>
+
+      <a class="project-row" href="https://deck-tune.vercel.app/" target="_blank">
+        <div class="project-num">03</div>
+        <div class="project-name"><em>deck</em><span class="accent-word">tune</span></div>
+        <div class="project-arrow">→</div>
+        <div class="tip">
+          <div class="tip-desc">Steam Deck optimizer — 5 AI play modes.</div>
+          <div class="tip-tags"><span class="tip-tag">Gaming</span><span class="tip-tag">AI</span><span class="tip-tag">Tools</span></div>
+        </div>
+      </a>
+
+      <a class="project-row" href="https://gas-pulse.vercel.app/" target="_blank">
+        <div class="project-num">04</div>
+        <div class="project-name"><em>gas</em><span class="accent-word">pulse</span></div>
+        <div class="project-arrow">→</div>
+        <div class="tip">
+          <div class="tip-desc">US gas prices across 270+ cities.</div>
+          <div class="tip-tags"><span class="tip-tag">Data</span><span class="tip-tag">US</span><span class="tip-tag">Real-time</span></div>
+        </div>
+      </a>
+
+      <a class="project-row" href="https://shelf-umber.vercel.app/" target="_blank">
+        <div class="project-num">05</div>
+        <div class="project-name"><em>shel</em><span class="accent-word">f</span></div>
+        <div class="project-arrow">→</div>
+        <div class="tip">
+          <div class="tip-desc">Taste-based book & music recommendations.</div>
+          <div class="tip-tags"><span class="tip-tag">Books</span><span class="tip-tag">AI</span><span class="tip-tag">Discovery</span></div>
+        </div>
+      </a>
+
+      <a class="project-row" href="https://experience-physics.vercel.app/" target="_blank">
+        <div class="project-num">06</div>
+        <div class="project-name"><em>experience</em> <span class="accent-word">physics</span></div>
+        <div class="tip">
+          <div class="tip-desc">Interactive physics for kids — gravity, light, sound, quantum & space.</div>
+          <div class="tip-tags"><span class="tip-tag">Education</span><span class="tip-tag">Interactive</span><span class="tip-tag">Kids</span></div>
+        </div>
+        <div class="project-arrow">→</div>
+      </a>
+    </div></div>
+  </div>
+</div>
+
+<div class="contact-strip">
+  <div class="contact-inner">
+    <div class="contact-label">Get in touch</div>
+    <div class="contact-links">
+      <a href="/cdn-cgi/l/email-protection#d7bfb2bbbbb897bab6b9b6bca4a2f9b4b8ba" class="contact-link"><span class="__cf_email__" data-cfemail="f29a979e9e9db29f939c93998187dc919d9f">[email&#160;protected]</span></a>
+      <span class="contact-sep">·</span>
+      <a href="https://github.com/manaksu" target="_blank" class="contact-link">GitHub</a>
+      <span class="contact-sep">·</span>
+      <a href="https://linkedin.com/in/manaksu" target="_blank" class="contact-link">LinkedIn</a>
+    </div>
+  </div>
+</div>
+<footer>
+  <span>manaksu · portfolio</span>
+  <span>© 2026 manaksu</span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+var n = 0;
+var numEl = document.getElementById("ldNum");
+var fillEl = document.getElementById("ldFill");
+var lblEl = document.getElementById("ldLbl");
+var loader = document.getElementById("loader");
+
+var t = setInterval(function() {
+  n = Math.min(n + 1, 88);
+  numEl.textContent = n;
+  fillEl.style.width = n + "%";
+  if (n >= 60) lblEl.textContent = "Almost there";
+  else if (n >= 30) lblEl.textContent = "Preparing";
+}, 22);
+
+window.addEventListener("load", function() {
+  clearInterval(t);
+  var c = n;
+  var t2 = setInterval(function() {
+    c = Math.min(c + 2, 100);
+    numEl.textContent = c;
+    fillEl.style.width = c + "%";
+    if (c >= 100) {
+      clearInterval(t2);
+      setTimeout(function() { loader.classList.add("done"); }, 300);
+    }
+  }, 16);
+});
+
+window.addEventListener("scroll", function() {
+  var nav = document.getElementById("mainNav");
+  nav.style.opacity = window.scrollY > window.innerHeight * 0.85 ? "0" : "1";
+});
+
+
+</script>
+</body>
+</html>
