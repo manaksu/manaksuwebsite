@@ -32,27 +32,27 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:0 52px;height:64px;di
 #hero{min-height:50vh;position:relative;display:flex;align-items:center;overflow:hidden;max-width:none;padding:0}
 
 
-.hero-content{position:relative;z-index:2;padding:0 52px;max-width:680px}
+.hero-content{position:relative;z-index:2;padding:0 52px;max-width:720px}
 
 /* ── Sections ── */
 .section-wrap{max-width:960px;margin:0 auto;padding:48px 52px 40px}
-.section-label{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--hint);margin-bottom:28px;display:flex;align-items:center;gap:16px}
-.section-label::after{content:"";flex:1;height:1px;background:var(--border)}
-.section-divider{border-top:1px solid var(--border);margin-top:0}
+.section-label{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--hint);margin-bottom:28px;margin-left:-8px}
+.section-divider{margin-top:0}
 
 /* ── About ── */
 .about-text{position:relative;z-index:2}
-.about-heading{font-family:"Cormorant Garamond",serif;font-size:clamp(42px,6vw,68px);font-weight:300;line-height:1.0;letter-spacing:-.02em;margin-bottom:24px;color:var(--ink)}
+#projects-wrap{border-bottom:1px solid var(--border)}
+.about-heading{font-family:"Cormorant Garamond",serif;font-size:clamp(44px,6.5vw,72px);font-weight:300;line-height:1.0;letter-spacing:-.02em;margin-bottom:24px;color:var(--ink)}
 .about-heading em{font-style:italic;color:var(--muted)}
-.about-body{font-size:15px;font-weight:300;color:var(--muted);line-height:1.9;max-width:480px}
+.about-body{font-size:15px;font-weight:300;color:var(--muted);line-height:1.9;max-width:480px;padding-left:2px}
 .about-body p+p{margin-top:16px}
 
 /* ── Projects ── */
 .project-list{display:flex;flex-direction:column}
-.project-row{display:flex;align-items:center;padding:22px 0;border-bottom:1px solid var(--border);cursor:pointer;text-decoration:none;color:inherit;transition:padding-left .25s ease;position:relative;}
-.project-row:first-child{border-top:1px solid var(--border)}
+.project-row{display:flex;align-items:center;padding:22px 0;cursor:pointer;text-decoration:none;color:inherit;transition:padding-left .25s ease;position:relative;}
+.project-row:first-child{border-top:none}
 .project-row:hover{padding-left:10px}
-.project-num{font-family:"Space Mono",monospace;font-size:9px;color:var(--hint);letter-spacing:.14em;width:32px;flex-shrink:0;transition:color .2s}
+.project-num{font-family:"Space Mono",monospace;font-size:9px;color:var(--hint);letter-spacing:.14em;width:28px;flex-shrink:0;transition:color .2s}
 .project-name{font-family:"Cormorant Garamond",serif;font-size:clamp(22px,3vw,34px);font-weight:300;color:rgba(26,25,22,.55);line-height:1;flex:1;letter-spacing:-.02em;transition:color .25s}
 .project-name em{font-style:italic}
 .accent-word{color:rgba(124,29,29,.75);transition:color .25s}
@@ -67,35 +67,31 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:0 52px;height:64px;di
 .tip{
   pointer-events:none;
   position:absolute;
-  left:40px;
-  bottom:calc(100% + 6px);
+  left:9999px;
+  top:50%;
+  transform:translateY(-50%);
   background:var(--ink);
   color:var(--bg);
   padding:8px 14px;
   border-radius:2px;
   white-space:nowrap;
   opacity:0;
-  pointer-events:none;
   transition:opacity .18s ease, transform .18s ease;
-  transform:translateY(4px);
   z-index:20;
 }
 .tip-desc{font-family:"Jost",sans-serif;font-size:11px;font-weight:300;letter-spacing:.02em;margin-bottom:5px}
 .tip-tags{display:flex;gap:5px}
 .tip-tag{font-family:"Space Mono",monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border:1px solid rgba(237,234,227,.2);color:rgba(237,234,227,.6);border-radius:0}
-.project-row:hover .tip{opacity:1;transform:translateY(0)}
+.project-row:hover .tip{opacity:1}
 
 /* ── Footer ── */
-.contact-strip{border-top:1px solid var(--border);padding:48px 52px}
-.contact-inner{max-width:960px;margin:0 auto}
-.contact-label{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--hint);margin-bottom:16px}
-.contact-links{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.contact-link{font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:300;color:var(--ink);text-decoration:none;transition:opacity .2s}
-.contact-link:hover{opacity:.5}
-.contact-sep{color:var(--border2);font-size:18px}
-footer{border-top:1px solid var(--border);padding:26px 52px;font-family:"Space Mono",monospace;font-size:9px;color:var(--hint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;letter-spacing:.12em;text-transform:uppercase}
+.footer-links{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.footer-link{font-family:"Space Mono",monospace;font-size:9px;color:var(--hint);letter-spacing:.08em;text-decoration:none;transition:opacity .2s}
+.footer-link:hover{opacity:.6}
+.footer-sep{color:var(--border2)}
+footer{border-top:1px solid var(--border);padding:26px 52px;font-family:"Space Mono",monospace;font-size:9px;color:var(--hint);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;letter-spacing:.08em;text-transform:uppercase}
 
-@media(max-width:768px){.contact-strip{padding:36px 24px}.contact-link{font-size:18px}.hero-content{padding:48px 24px 44px}.hero-statement span{font-size:clamp(26px,7vw,38px)}.hero-sub-row{flex-direction:column;gap:16px}.hero-divider{width:40px;height:1px;min-height:auto}
+@media(max-width:768px){.hero-content{padding:48px 24px 44px}.hero-statement span{font-size:clamp(26px,7vw,38px)}.hero-sub-row{flex-direction:column;gap:16px}.hero-divider{width:40px;height:1px;min-height:auto}
   nav{padding:0 24px}
   .hero-content{padding:0 24px}
     .section-wrap{padding:72px 24px}
@@ -123,7 +119,7 @@ footer{border-top:1px solid var(--border);padding:26px 52px;font-family:"Space M
   </div>
 </section>
 
-<div class="section-divider">
+<div class="section-divider" id="about-wrap">
   <div class="section-wrap" id="about">
     <div class="section-label">About</div>
     <div class="about-layout">
@@ -136,7 +132,7 @@ footer{border-top:1px solid var(--border);padding:26px 52px;font-family:"Space M
   </div>
 </div>
 
-<div class="section-divider">
+<div class="section-divider" id="projects-wrap">
   <div class="section-wrap" id="projects">
     <div class="section-label">Selected Work</div>
     <div class="project-list">
@@ -203,21 +199,16 @@ footer{border-top:1px solid var(--border);padding:26px 52px;font-family:"Space M
   </div>
 </div>
 
-<div class="contact-strip">
-  <div class="contact-inner">
-    <div class="contact-label">Get in touch</div>
-    <div class="contact-links">
-      <a href="/cdn-cgi/l/email-protection#d7bfb2bbbbb897bab6b9b6bca4a2f9b4b8ba" class="contact-link"><span class="__cf_email__" data-cfemail="f29a979e9e9db29f939c93998187dc919d9f">[email&#160;protected]</span></a>
-      <span class="contact-sep">·</span>
-      <a href="https://github.com/manaksu" target="_blank" class="contact-link">GitHub</a>
-      <span class="contact-sep">·</span>
-      <a href="https://linkedin.com/in/manaksu" target="_blank" class="contact-link">LinkedIn</a>
-    </div>
-  </div>
-</div>
+
 <footer>
-  <span>manaksu · portfolio</span>
-  <span>© 2026 manaksu</span>
+  <span>manaksu · portfolio · © 2026</span>
+  <div class="footer-links">
+    <a href="mailto:hello@manaksu.com" class="footer-link">hello@manaksu.com</a>
+    <span class="footer-sep">·</span>
+    <a href="https://github.com/manaksu" target="_blank" class="footer-link">GitHub</a>
+    <span class="footer-sep">·</span>
+    <a href="https://linkedin.com/in/manaksu" target="_blank" class="footer-link">LinkedIn</a>
+  </div>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
@@ -255,6 +246,22 @@ window.addEventListener("scroll", function() {
 });
 
 
+document.querySelectorAll(".project-row").forEach(function(row) {
+  row.addEventListener("mouseenter", function() {
+    var tip = row.querySelector(".tip");
+    var name = row.querySelector(".project-name");
+    if (tip && name) {
+      // Create a hidden span to measure actual text width
+      var span = document.createElement("span");
+      span.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;font-family:'Cormorant Garamond',serif;font-size:" + getComputedStyle(name).fontSize + ";font-weight:300;letter-spacing:-.02em";
+      span.innerHTML = name.innerHTML;
+      document.body.appendChild(span);
+      var textWidth = span.offsetWidth;
+      document.body.removeChild(span);
+      tip.style.left = (name.offsetLeft + textWidth + 14) + "px";
+    }
+  });
+});
 </script>
 </body>
 </html>
